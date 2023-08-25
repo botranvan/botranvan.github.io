@@ -75,7 +75,7 @@ Tại thời điểm này, chúng ta cần thay đổi config server-id để de
 
 ```bash
 [mysqld]
-binlog-format=ROW
+binlog_format=ROW
 expire_logs_days=1
 log_bin=mysql-bin
 log_slave_updates=ON
