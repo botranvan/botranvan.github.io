@@ -93,137 +93,137 @@ Các thành phần Postgres, Patroni & ETCD được cài cùng với nhau trên
   ```
 
 - Tạo file config `/etc/patroni/config.yml` cho patroni như sau:
-   ```yaml
-   bootstrap:
-     dcs:
-       failsafe_mode: true
-       loop_wait: 15
-       maximum_lag_on_failover: 33554432
-       postgresql:
-         parameters:
-           archive_command: test ! -f /var/lib/postgresql/data/wal_archive/%f && cp %p
-             /var/lib/postgresql/data/wal_archive/%f
-           archive_mode: 'on'
-           archive_timeout: 1800s
-           datestyle: iso, mdy
-           default_text_search_config: pg_catalog.english
-           effective_cache_size: 512MB
-           hot_standby: 'on'
-           lc_messages: en_US.UTF-8
-           lc_monetary: en_US.UTF-8
-           lc_numeric: en_US.UTF-8
-           lc_time: en_US.UTF-8
-           log_destination: stderr
-           log_directory: /var/log/postgresql
-           log_file_mode: 384
-           log_filename: postgresql.log
-           log_line_prefix: '%t [%p]: [%l-1] %c %x %d %u %a %h '
-           log_rotation_age: 1d
-           log_rotation_size: 100MB
-           log_timezone: Etc/UTC
-           log_truncate_on_rotation: 'on'
-           logging_collector: 'on'
-           max_connections: 200
-           max_wal_size: 1GB
-           min_wal_size: 80MB
-           timezone: Etc/UTC
-           update_process_title: 'off'
-           wal_keep_size: 1600MB
-           wal_log_hints: 'on'
-         use_pg_rewind: true
-         use_slots: true
-       retry_timeout: 15
-       ttl: 45
-     initdb:
-     - encoding: UTF8
-     - locale: en_US.UTF-8
-     - data-checksums
-   etcd3:
-     hosts:
-     - ETCD_IPAddress1:2379
-     - ETCD_IPAddress2:2379
-     - ETCD_IPAddress3:2379
-   log:
-     dir: /var/log/postgresql
-   postgresql:
-     authentication:
-       replication:
-         password: <password>
-         username: replicator
-       rewind:
-         password: <password>
-         username: replicator
-       superuser:
-         password: <password>
-         username: superuser
-     connect_address: <IPAddress>:5432
-     bin_dir: /usr/lib/postgresql/15/bin
-     config_dir: /etc/postgresql/15/main
-     data_dir: /var/lib/postgresql/15/main
-     listen: '*:5432'
-     name: <node_name>
-     parameters:
-       listen_addresses: '*'
-       log_autovacuum_min_duration: 0
-       log_checkpoints: false
-       log_connections: false
-       log_disconnections: false
-       max_stack_depth: 7MB
-       port: 5432
-       shared_buffers: 102MB
-       unix_socket_directories: /var/run/postgresql
-       wal_buffers: -1
-       wal_sync_method: fsync
-     pg_hba:
-     - local  all  postgres  trust
-     - local  replication  postgres  trust
-     - local  all  all  trust
-     - local  replication  replicator  trust
-     - host  all  all  ::1/128  md5
-     - host  all  postgres  127.0.0.1/32  trust
-     - host  all  postgres  ::1/128  trust
-     - host  all  postgres  all  reject
-     - host  replication  replicator  0.0.0.0/0  md5
-     - hostnossl  all  postgres  all  reject
-     - hostssl  all  +cloud  127.0.0.1/32  pam
-     - hostssl  all  +cloud  ::1/128  pam
-     - hostssl  all  +cloud  all  pam
-     - hostssl  all  all  all  md5
-     - hostssl  replication  replicator  0.0.0.0/0  md5
-     pgpass: /run/postgresql/pgpass
-     use_unix_socket: true
-     use_unix_socket_repl: true
-   restapi:
-     authentication:
-       password: <pasword>
-       username: postgres
-     connect_address: <IPAddress>:8008
-     listen: :8008
-   scope: postgres-patroni
-   ```
+  ```yaml
+  bootstrap:
+    dcs:
+      failsafe_mode: true
+      loop_wait: 15
+      maximum_lag_on_failover: 33554432
+      postgresql:
+        parameters:
+          archive_command: test ! -f /var/lib/postgresql/data/wal_archive/%f && cp %p
+            /var/lib/postgresql/data/wal_archive/%f
+          archive_mode: 'on'
+          archive_timeout: 1800s
+          datestyle: iso, mdy
+          default_text_search_config: pg_catalog.english
+          effective_cache_size: 512MB
+          hot_standby: 'on'
+          lc_messages: en_US.UTF-8
+          lc_monetary: en_US.UTF-8
+          lc_numeric: en_US.UTF-8
+          lc_time: en_US.UTF-8
+          log_destination: stderr
+          log_directory: /var/log/postgresql
+          log_file_mode: 384
+          log_filename: postgresql.log
+          log_line_prefix: '%t [%p]: [%l-1] %c %x %d %u %a %h '
+          log_rotation_age: 1d
+          log_rotation_size: 100MB
+          log_timezone: Etc/UTC
+          log_truncate_on_rotation: 'on'
+          logging_collector: 'on'
+          max_connections: 200
+          max_wal_size: 1GB
+          min_wal_size: 80MB
+          timezone: Etc/UTC
+          update_process_title: 'off'
+          wal_keep_size: 1600MB
+          wal_log_hints: 'on'
+        use_pg_rewind: true
+        use_slots: true
+      retry_timeout: 15
+      ttl: 45
+    initdb:
+    - encoding: UTF8
+    - locale: en_US.UTF-8
+    - data-checksums
+  etcd3:
+    hosts:
+    - ETCD_IPAddress1:2379
+    - ETCD_IPAddress2:2379
+    - ETCD_IPAddress3:2379
+  log:
+    dir: /var/log/postgresql
+  postgresql:
+    authentication:
+      replication:
+        password: <password>
+        username: replicator
+      rewind:
+        password: <password>
+        username: replicator
+      superuser:
+        password: <password>
+        username: superuser
+    connect_address: <IPAddress>:5432
+    bin_dir: /usr/lib/postgresql/15/bin
+    config_dir: /etc/postgresql/15/main
+    data_dir: /var/lib/postgresql/15/main
+    listen: '*:5432'
+    name: <node_name>
+    parameters:
+      listen_addresses: '*'
+      log_autovacuum_min_duration: 0
+      log_checkpoints: false
+      log_connections: false
+      log_disconnections: false
+      max_stack_depth: 7MB
+      port: 5432
+      shared_buffers: 102MB
+      unix_socket_directories: /var/run/postgresql
+      wal_buffers: -1
+      wal_sync_method: fsync
+    pg_hba:
+    - local  all  postgres  trust
+    - local  replication  postgres  trust
+    - local  all  all  trust
+    - local  replication  replicator  trust
+    - host  all  all  ::1/128  md5
+    - host  all  postgres  127.0.0.1/32  trust
+    - host  all  postgres  ::1/128  trust
+    - host  all  postgres  all  reject
+    - host  replication  replicator  0.0.0.0/0  md5
+    - hostnossl  all  postgres  all  reject
+    - hostssl  all  +cloud  127.0.0.1/32  pam
+    - hostssl  all  +cloud  ::1/128  pam
+    - hostssl  all  +cloud  all  pam
+    - hostssl  all  all  all  md5
+    - hostssl  replication  replicator  0.0.0.0/0  md5
+    pgpass: /run/postgresql/pgpass
+    use_unix_socket: true
+    use_unix_socket_repl: true
+  restapi:
+    authentication:
+      password: <pasword>
+      username: postgres
+    connect_address: <IPAddress>:8008
+    listen: :8008
+  scope: postgres-patroni
+  ```
 
-   **Lưu ý**:
+  **Lưu ý**:
     - bạn cần phải tạo các users/ roles tương ứng trong database với thông tin khai báo ở: `postgresql.authentication`. Chi tiết về các config options có thể tìm thấy [ở đây](https://patroni.readthedocs.io/en/latest/patroni_configuration.html). Thông tin về users/ roles trên các node phải giống nhau
     - cần phải khai báo đúng giá trị của `postgresql.bin_dir`, `postgresql.data_dir` & `postgresql.config_dir` đang có trên server thực hiện
     - Cần thay địa chỉ IP tương ứng của các nodes `IPAddress`
 
 - Thực hiện start patroni
-   ```bash
-   systemctl daemon-reload
-   systemctl start patroni
-   systemctl enable patroni
-   ```
+  ```bash
+  systemctl daemon-reload
+  systemctl start patroni
+  systemctl enable patroni
+  ```
 
 - Lúc này, chúng ta khởi tạo được một leader của cluster
-   ```bash
-   patronictl --config-file /etc/patroni/config.yml list
-
-   + Cluster: postgres-patroni ------------------+---------+---------+----+-----------+
-   | Member                      | Host          | Role    | State   | TL | Lag in MB |
-   +-----------------------------+---------------+---------+---------+----+-----------+
-   | postgres-patroni-cb5o3izc   | 10.20.161.208 | Leader  | running |  1 |           |
-   +-----------------------------+---------------+---------+---------+----+-----------+
-   ```
+  ```bash
+  patronictl --config-file /etc/patroni/config.yml list
+  
+  + Cluster: postgres-patroni ------------------+---------+---------+----+-----------+
+  | Member                      | Host          | Role    | State   | TL | Lag in MB |
+  +-----------------------------+---------------+---------+---------+----+-----------+
+  | postgres-patroni-cb5o3izc   | 10.20.161.208 | Leader  | running |  1 |           |
+  +-----------------------------+---------------+---------+---------+----+-----------+
+  ```
 
 #### 2.2 Khởi tạo Postgres Cluster
 
