@@ -92,7 +92,8 @@ Các thành phần Postgres, Patroni & ETCD được cài cùng với nhau trên
   WantedBy=multi-user.target
   ```
 
-- Tạo file config `/etc/patroni/config.yml` cho patroni như sau:
+- Tạo file config `/etc/patroni/config.yml` cho patroni như sau
+
   ```yaml
   bootstrap:
     dcs:
