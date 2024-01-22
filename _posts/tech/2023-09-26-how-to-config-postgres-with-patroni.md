@@ -52,6 +52,7 @@ Node Name | IP Address |
 yanfei-spilo-1 | 10.26.235.206 |
 yanfei-spilo-2 | 10.26.235.157 |
 yanfei-spilo-3 | 10.26.235.75 |
+
 Sau khi chúng ta đã cài đặt docker/ docker-compose và etcd cluster (etcd cluster có thể chạy trên container). Chúng ta thực hiện như sau:
 
 1. Tạo etcd cluster trên các nodes:
