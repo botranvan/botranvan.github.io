@@ -36,6 +36,7 @@ Về cơ bản thì để triển khai Sentinel cũng tương đối khá dễ d
 ![2023-09-27-how-to-config-redis-with-sentinel/arch.png](/images/2023-09-27-how-to-config-redis-with-sentinel/arch.png)
 
 trong đó, các nodes có địa chỉ IP tương ứng như sau:
+
 Node Name | IP Address |
 ----------|------------
 redis-xpg72e62 | 10.20.161.181 |
@@ -257,6 +258,7 @@ redis5-repl-2 | 10.20.161.111 |
     Lưu ý: Cần thay địa chỉ IP tương ứng của bạn vào
 
     Tạo file config `/etc/redis/sentinel.conf` để cấu hình sentinel như sau:
+    - Trên node 1
         ```bash
         daemonize no
         dir /var/lib/redis/data
@@ -328,9 +330,10 @@ redis5-repl-2 | 10.20.161.111 |
 
 2. Tạo container database trên các nodes
 
-Trên các nodes tiến hành tạo các containers như sau:
+    Trên các nodes tiến hành tạo các containers như sau:
 
 - Tạo container chạy Redis
+
     ```bash
         docker create --name database --network host \
         -v /dev/shm:/dev/shm \
@@ -341,6 +344,7 @@ Trên các nodes tiến hành tạo các containers như sau:
         redis:5.0.14 /etc/redis/sentinel.conf
         ```
 - Tạo container chạy Sentinel
+
     ```bash
         docker create --name sentinel --network host \
         -v /dev/shm:/dev/shm \
