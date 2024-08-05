@@ -335,25 +335,25 @@ redis5-repl-2 | 10.20.161.111 |
 - Tạo container chạy Redis
 
     ```bash
-        docker create --name database --network host \
-        -v /dev/shm:/dev/shm \
-        -v /etc/redis/etc/redis \
-        -v /var/lib/redis:/var/lib/redis \
-        -v /var/log/redis:/var/log/redis \
-        -v /var/run/redis:/var/run/redis \
-        redis:5.0.14 /etc/redis/sentinel.conf
-        ```
+    docker create --name database --network host \
+    -v /dev/shm:/dev/shm \
+    -v /etc/redis/etc/redis \
+    -v /var/lib/redis:/var/lib/redis \
+    -v /var/log/redis:/var/log/redis \
+    -v /var/run/redis:/var/run/redis \
+    redis:5.0.14 /etc/redis/sentinel.conf
+    ```
 - Tạo container chạy Sentinel
 
     ```bash
-        docker create --name sentinel --network host \
-        -v /dev/shm:/dev/shm \
-        -v /etc/redis/etc/redis \
-        -v /var/lib/redis:/var/lib/redis \
-        -v /var/log/redis:/var/log/redis \
-        -v /var/run/redis:/var/run/redis \
-        redis:5.0.14 --sentinel /etc/redis/sentinel.conf
-        ```
+    docker create --name sentinel --network host \
+    -v /dev/shm:/dev/shm \
+    -v /etc/redis/etc/redis \
+    -v /var/lib/redis:/var/lib/redis \
+    -v /var/log/redis:/var/log/redis \
+    -v /var/run/redis:/var/run/redis \
+    redis:5.0.14 --sentinel /etc/redis/sentinel.conf
+    ```
 
 ### 4. Kiểm tra kết quả
 
