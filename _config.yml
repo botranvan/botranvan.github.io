@@ -1,7 +1,7 @@
 # Site settings
-title: "Bo Tran – DevOps & Database notes"
+title: "Bo Tran – Ministry's personal blog"
 email: tranbo9xnd@gmail.com
-description: "Ghi chép về DevOps, database high availability, replication và migration (PostgreSQL, MySQL, MongoDB, Redis, OpenStack)."
+description: "Ghi chép về DevOps, Cloud & Database"
 lang: vi
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://botranvan.github.io" # the base hostname & protocol for your site
