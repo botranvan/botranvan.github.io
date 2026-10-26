@@ -4,26 +4,31 @@
     {% include header.html %}
   </head>
   <body>
-    <button id="js-fullscreen" aria-label="Toggle fullscreen"><span id="icon-arrow" class="fontello"></span></button>
-    <button id="scroll-top" aria-label="Scroll to top"><span id="icon-arrow-up" class="fontello"></span></button>
+    <header id="mobile-bar">
+      <button id="mobile-bar__menu" class="mobile-bar__btn" aria-label="Danh sách bài viết">☰</button>
+      <a id="mobile-bar__title" class="js-pjax" href="/">{{ site.title }}</a>
+      <button id="mobile-bar__search" class="mobile-bar__btn js-open-palette" aria-label="Tìm kiếm (Ctrl K)">⌕</button>
+    </header>
+    <button id="js-fullscreen" aria-label="Ẩn/hiện danh sách bài viết"><span id="icon-arrow" class="fontello"></span></button>
+    <button id="scroll-top" aria-label="Lên đầu trang"><span id="icon-arrow-up" class="fontello"></span></button>
 
     {% include nav.html %}
     <div id="post">
-      <div id="pjax">
-        {{ content }}
-        <br>
-        <hr class="footer-divider">
-        {% include copyright.html %}
-      </div> <!-- end #pjax -->
+      <div id="post__layout">
+        <div id="pjax">
+          {{ content }}
+          <hr class="footer-divider">
+          {% include copyright.html %}
+        </div> <!-- end #pjax -->
 
-      <div id="post__toc-trigger">
-        <div id="post__toc">
-          <span id="post__toc-title">List of contents</span>
+        <aside id="post__toc" aria-label="Mục lục">
+          <span id="post__toc-title">Mục lục</span>
           <ul id="post__toc-ul"></ul>
-        </div>
+        </aside>
       </div>
     </div> <!-- end #post -->
+
+    <script id="posts-data" type="application/json">[{% for post in site.posts %}{"title":{{ post.title | jsonify }},"url":{{ post.url | jsonify }},"date":{{ post.date | date: "%d/%m/%Y" | jsonify }},"description":{{ post.description | default: "" | jsonify }},"tags":{{ post.tags | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
     {% include scripts.html %}
-    <script id="dsq-count-scr" src="https://{{ site.disqus.shortname }}.disqus.com/count.js" async></script>
    </body>
  </html>

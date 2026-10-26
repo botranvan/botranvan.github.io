@@ -2,6 +2,7 @@
 layout: post
 title: High Availability Redis with Sentinel
 description: "Cấu hình Redis High Availability với replication và Redis Sentinel để tự động failover khi master gặp sự cố."
+tags: [redis, high-availability]
 category: tech
 ---
 

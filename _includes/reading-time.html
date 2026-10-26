@@ -1,0 +1,1 @@
+{% assign rt_words = include.content | strip_html | number_of_words %}{% assign rt_min = rt_words | divided_by: 250 %}{% if rt_min < 1 %}{% assign rt_min = 1 %}{% endif %}{{ rt_min }} phút đọc

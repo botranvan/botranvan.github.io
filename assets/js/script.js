@@ -11,7 +11,6 @@ var sidebar    = $('#sidebar'),
     content    = $('#pjax'),
     button     = $('#icon-arrow');
     scrollTop  = $('#icon-arrow-up');
-    tocbar     = $('#post__toc-trigger');
 
 // Detect window size, if less than 1280px add class 'mobile' to sidebar therefore it will be auto hide when trigger the pjax request in small screen devices.
 if ($(window).width() < 1280) {
@@ -19,16 +18,10 @@ if ($(window).width() < 1280) {
 }
 
 // Tags switcher
-var clickHandler = function(id) {
-  return function() {
-    $(this).addClass('active').siblings().removeClass('active');
-    $('.pl__all').hide();
-    $('.' + id).delay(50).fadeIn(350);
-  }
-};
-
-$('#tags__ul li').each(function(index){
-  $('#' + $(this).attr('id')).on('click', clickHandler($(this).attr('id')));
+$('#tags__ul li').on('click', function() {
+  $(this).addClass('active').siblings().removeClass('active');
+  postFilter.tag = $(this).data('tag');
+  applyPostFilter();
 });
 
 // If sidebar has class 'mobile', hide it after clicking.
@@ -44,14 +37,12 @@ $('#js-fullscreen').on('click', function() {
   if (button.hasClass('fullscreen')) {
     sidebar.removeClass('fullscreen');
     button.removeClass('fullscreen');
-    tocbar.removeClass('fullscreen');
     content.delay(300).queue(function(){
       $(this).removeClass('fullscreen').dequeue();
     });
   } else {
     sidebar.addClass('fullscreen');
     button.addClass('fullscreen');
-    tocbar.addClass('fullscreen');
     content.delay(200).queue(function(){
       $(this).addClass('fullscreen').dequeue();
     });
@@ -62,6 +53,16 @@ $('#scroll-top').on('click', function() {
   container.animate({
     scrollTop: 0
   }, 200);
+});
+
+// Mobile top bar menu button toggles the posts list
+$('#mobile-bar__menu').on('click', function() {
+  $('#js-fullscreen').trigger('click');
+});
+
+// Show the scroll-to-top button only after scrolling down
+container.on('scroll', function() {
+  $('#scroll-top').toggleClass('is-visible', container.scrollTop() > 400);
 });
 
 $('#mobile-avatar').on('click', function(){
@@ -82,7 +83,7 @@ $(document).on('click', '.js-email', function(e) {
 });
 
 // Pjax
-$(document).pjax('#avatar, #mobile-avatar, .pl__all', '#pjax', { fragment: '#pjax', timeout: 10000 });
+$(document).pjax('#avatar, #mobile-avatar, .pl__all, .js-pjax', '#pjax', { fragment: '#pjax', timeout: 10000 });
 $(document).on({
   'pjax:click': function() {
     content.removeClass('fadeIn').addClass('fadeOut');
@@ -102,49 +103,15 @@ $(document).on({
 // Re-run scripts for post content after pjax
 function afterPjax() {
   // Open links in new tab
-  $('#post__content a').attr({target: '_blank', rel: 'noopener'});
+  $('#post__content a').not('.js-pjax').attr({target: '_blank', rel: 'noopener'});
 
-  // Generate post TOC for h1 and h2
-  var toc = $('#post__toc-ul');
-  // Empty TOC and generate an entry for post title
-  var title = $('#post__title').text()
-  toc.empty().append('<li class="post__toc-li post__toc-h1"><a href="#post__title" class="js-anchor-link">' + title + '</a></li>');
+  // Mark the current post in the sidebar
+  $('.pl__all').removeClass('active').filter(function() {
+    return this.pathname === location.pathname;
+  }).addClass('active');
 
-  // Generate entries for h1 and h2
-  $('#post__content').children('h1,h2,h3').each(function() {
-    // Skip post title
-    if ($(this).attr('id') == 'post__title') {
-      return;
-    }
-
-    // Generate random ID for each heading
-    $(this).attr('id', function() {
-      var ID = "",
-          alphabet = "abcdefghijklmnopqrstuvwxyz";
-
-      for(var i=0; i < 5; i++) {
-        ID += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-      }
-      return ID;
-    });
-
-    // Add each chapter to TOC
-    if ($(this).prop("tagName") == 'H2') {
-      toc.append('<li class="post__toc-li post__toc-h2"><a href="#' + $(this).attr('id') + '" class="js-anchor-link">' + $(this).text() + '</a></li>');
-    } else if ($(this).prop("tagName") == 'H3') {
-      toc.append('<li class="post__toc-li post__toc-h3"><a href="#' + $(this).attr('id') + '" class="js-anchor-link">' + $(this).text() + '</a></li>');
-    }
-  });
-
-  // Smooth scrolling
-  $('.js-anchor-link').on('click', function() {
-    var target = $(this.hash);
-    container.animate({scrollTop: target.offset().top + container.scrollTop() - 70}, 500, function() {
-      target.addClass('flash').delay(700).queue(function() {
-        $(this).removeClass('flash').dequeue();
-      });
-    });
-  });
+  // TOC, code blocks, image zoom, lazy Disqus (assets/js/enhance.js)
+  blogEnhance();
 
   // Lazy Loading Disqus
   // http://jsfiddle.net/dragoncrew/SHGwe/1/

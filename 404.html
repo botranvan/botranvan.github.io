@@ -1,14 +1,18 @@
 ---
 layout: page
-title: 404 Page Not Found
+title: Không tìm thấy trang
 ---
 
-<h4 id="post__title" data-identifier="{{ page.date | date: "%Y%m%d" }}" style="text-align: center">
-  The site configured at this address does not contain the requested file.<a href="/" target="_self">Home</a>.
-</h4>
+<div class="notfound">
+  <img src="{{ site.image }}404.jpg" alt="404 - Không tìm thấy trang">
+  <p>Trang bạn tìm không tồn tại hoặc đã được đổi địa chỉ.</p>
+  <button type="button" class="notfound__search js-open-palette">⌕ Tìm bài viết… <kbd>Ctrl</kbd> <kbd>K</kbd></button>
 
-<a href="/" style="text-align: center">
-  <div align="center">
-    <img src="{{ site.image }}404.jpg" alt="404 - Page not found">
-  </div>
-</a>
+  <h2>Bài viết mới nhất</h2>
+  <ul class="notfound__recent">
+  {% for post in site.posts limit:5 %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> <span class="pl__date">{{ post.date | date: "%d/%m/%Y" }}</span></li>
+  {% endfor %}
+  </ul>
+  <p><a href="/">← Về trang chủ</a></p>
+</div>

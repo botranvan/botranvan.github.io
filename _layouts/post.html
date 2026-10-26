@@ -4,28 +4,62 @@ layout: default
 
 <article id="post__content">
   <h1 id="post__title" data-identifier="{{ page.date | date: "%Y%m%d" }}">{{ page.title }}</h1>
-  <div id="post__date">{{ page.date | date: "%Y-%m-%d" }}</div>
-  <aside id="declare" class="declare">
-    <hr/>
-    The authorization method used in all articles in this blog is:
-    <ul>
-      <li>free reprint</li>
-      <li>non-commercial</li>
-      <li>non-derivative</li>
-      <li>keep signature</li>
-    </ul>
-    Please be sure to indicate the source, thank you.<br>
-    Disclaimer: This blog is welcome to forward, but please keep the original author information!<br>
-    Facebook: <a href="{{ site.author.facebook }}" rel="noopener">@{{ site.author.facebook_username }}</a>;<br>
-    Blog address: <a href="{{ site.url }}">{{ site.title }}</a>;<br>
-    Content is my study, research and summary, if there are similarities, it is an honor!
-    <hr/>
-  </aside>
+  <div id="post__meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d/%m/%Y" }}</time>
+    · {% include reading-time.html content=content %}
+    {% for tag in page.tags %}<span class="post__tag">#{{ tag }}</span>{% endfor %}
+  </div>
+
+  {% if page.series %}
+  {% assign series_posts = site.posts | where: "series", page.series | sort: "date" %}
+  <nav class="post__series" aria-label="Loạt bài">
+    <div class="post__series-title">Loạt bài: {{ page.series }}</div>
+    <ol>
+      {% for sp in series_posts %}
+        {% if sp.url == page.url %}
+          <li class="is-current">{{ sp.title }}</li>
+        {% else %}
+          <li><a class="js-pjax" href="{{ sp.url }}">{{ sp.title }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </nav>
+  {% endif %}
+
   {{ content | replace: '<img ', '<img loading="lazy" ' }}
+
+  <details id="declare" class="declare">
+    <summary>Bản quyền &amp; trích dẫn</summary>
+    Các bài viết trên blog được chia sẻ theo nguyên tắc:
+    <ul>
+      <li>được phép đăng lại tự do</li>
+      <li>không sử dụng cho mục đích thương mại</li>
+      <li>không chỉnh sửa nội dung</li>
+      <li>giữ nguyên thông tin tác giả</li>
+    </ul>
+    Vui lòng ghi rõ nguồn khi chia sẻ, cảm ơn bạn!<br>
+    Facebook: <a href="{{ site.author.facebook }}" rel="noopener">@{{ site.author.facebook_username }}</a><br>
+    Blog: <a href="{{ site.url }}">{{ site.title }}</a><br>
+    Nội dung là những gì mình học, nghiên cứu và tổng hợp lại, nếu có điểm tương đồng thì đó là vinh hạnh của mình!
+  </details>
 </article>
 <!-- end #post__content -->
 
-<h2 id="post__discuss">Discuss</h2>
-<img src="/images/like.jpeg" alt="Appreciation" class="image-center" loading="lazy">
+<nav class="post__nav" aria-label="Bài viết khác">
+  {% if page.previous %}
+    <a class="post__nav-link post__nav-prev js-pjax" href="{{ page.previous.url }}" rel="prev">
+      <span class="post__nav-label">← Bài trước <kbd>[</kbd></span>
+      <span class="post__nav-title">{{ page.previous.title }}</span>
+    </a>
+  {% else %}<span></span>{% endif %}
+  {% if page.next %}
+    <a class="post__nav-link post__nav-next js-pjax" href="{{ page.next.url }}" rel="next">
+      <span class="post__nav-label">Bài tiếp theo <kbd>]</kbd> →</span>
+      <span class="post__nav-title">{{ page.next.title }}</span>
+    </a>
+  {% endif %}
+</nav>
+
+<h2 id="post__discuss">Bình luận</h2>
 {% include disqus.html %}
 {% include share.html %}
