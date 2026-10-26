@@ -60,41 +60,41 @@
 
   function goNext() {
     var p = nextPost();
-    if (p) go(p.url); else toast('Đây là bài mới nhất');
+    if (p) go(p.url); else toast('This is the newest post');
   }
   function goPrevious() {
     var p = previousPost();
-    if (p) go(p.url); else toast(currentIndex() === -1 ? 'Hãy mở một bài viết trước' : 'Đây là bài cũ nhất');
+    if (p) go(p.url); else toast(currentIndex() === -1 ? 'Open a post first' : 'This is the oldest post');
   }
 
   var commands = [
-    { title: 'Bài tiếp theo', keys: [']'], words: 'next sau moi hon', run: goNext,
+    { title: 'Next post', keys: [']'], words: 'next sau moi hon', run: goNext,
       detail: function() { var p = nextPost(); return p ? p.title : ''; } },
-    { title: 'Bài trước', keys: ['['], words: 'previous prev cu hon', run: goPrevious,
+    { title: 'Previous post', keys: ['['], words: 'previous prev cu hon', run: goPrevious,
       detail: function() { var p = previousPost(); return p ? p.title : ''; } },
-    { title: 'Trang chủ', keys: [], words: 'home index', run: function() { go('/'); } },
-    { title: 'Giới thiệu', keys: [], words: 'about me lien he contact', run: function() { go('/about.html'); } },
-    { title: 'Ẩn/hiện danh sách bài viết', keys: [], words: 'sidebar menu toggle', run: function() { $('#js-fullscreen').trigger('click'); } },
-    { title: 'Lên đầu trang', keys: [], words: 'top scroll', run: function() { $('#post').animate({ scrollTop: 0 }, 200); } },
-    { title: 'Sao chép liên kết trang này', keys: [], words: 'copy link url share',
+    { title: 'Home', keys: [], words: 'home index', run: function() { go('/'); } },
+    { title: 'About me', keys: [], words: 'about me lien he contact', run: function() { go('/about.html'); } },
+    { title: 'Show/hide posts list', keys: [], words: 'sidebar menu toggle', run: function() { $('#js-fullscreen').trigger('click'); } },
+    { title: 'Scroll to top', keys: [], words: 'top scroll', run: function() { $('#post').animate({ scrollTop: 0 }, 200); } },
+    { title: 'Copy link to this page', keys: [], words: 'copy link url share',
       run: function() {
-        var done = function() { toast('Đã sao chép liên kết'); };
+        var done = function() { toast('Link copied'); };
         if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(location.href).then(done);
-        else window.prompt('Liên kết:', location.href);
+        else window.prompt('Link:', location.href);
       } },
     { title: 'RSS', keys: [], words: 'feed subscribe', run: function() { window.open(RSS, '_blank', 'noopener'); } },
     { title: 'GitHub', keys: [], words: 'source code', run: function() { window.open(GITHUB, '_blank', 'noopener'); } },
-    { title: 'Phím tắt', keys: ['?'], words: 'shortcuts help keyboard', run: function() { openPalette('help'); } }
+    { title: 'Keyboard shortcuts', keys: ['?'], words: 'shortcuts help keyboard', run: function() { openPalette('help'); } }
   ];
 
   var shortcuts = [
-    [['Ctrl', 'K'], 'Mở command palette (⌘ K trên macOS)'],
-    [['/'], 'Tìm bài viết'],
-    [[']'], 'Bài tiếp theo (mới hơn)'],
-    [['['], 'Bài trước (cũ hơn)'],
-    [['?'], 'Xem phím tắt'],
-    [['↑', '↓', 'Enter'], 'Chọn trong palette'],
-    [['Esc'], 'Đóng']
+    [['Ctrl', 'K'], 'Open command palette (⌘ K on macOS)'],
+    [['/'], 'Search posts'],
+    [[']'], 'Next post (newer)'],
+    [['['], 'Previous post (older)'],
+    [['?'], 'Show shortcuts'],
+    [['↑', '↓', 'Enter'], 'Select in palette'],
+    [['Esc'], 'Close']
   ];
 
   function kbd(keys) {
@@ -109,10 +109,10 @@
     '<div class="palette__backdrop"></div>' +
     '<div class="palette__box" role="dialog" aria-modal="true" aria-label="Command palette">' +
       '<input class="palette__input" type="text" autocomplete="off" spellcheck="false" ' +
-        'placeholder="Tìm bài viết hoặc gõ lệnh..." aria-controls="palette-list">' +
+        'placeholder="Search posts or type a command..." aria-controls="palette-list">' +
       '<ul class="palette__list" id="palette-list" role="listbox"></ul>' +
-      '<div class="palette__footer">' + kbd(['↑', '↓']) + ' di chuyển · ' + kbd(['Enter']) + ' mở · ' +
-        kbd(['Esc']) + ' đóng · ' + kbd(['?']) + ' phím tắt</div>' +
+      '<div class="palette__footer">' + kbd(['↑', '↓']) + ' move · ' + kbd(['Enter']) + ' open · ' +
+        kbd(['Esc']) + ' close · ' + kbd(['?']) + ' shortcuts</div>' +
     '</div>';
   document.body.appendChild(root);
 
@@ -167,7 +167,7 @@
   function render() {
     if (root.dataset.mode === 'help') {
       items = [];
-      list.innerHTML = '<li class="palette__group">Phím tắt</li>' + shortcuts.map(function(s) {
+      list.innerHTML = '<li class="palette__group">Keyboard shortcuts</li>' + shortcuts.map(function(s) {
         return '<li class="palette__help"><span>' + escapeHtml(s[1]) + '</span><span>' + kbd(s[0]) + '</span></li>';
       }).join('');
       return;
@@ -176,13 +176,13 @@
     items = search(input.value);
     selected = Math.min(selected, Math.max(items.length - 1, 0));
     if (!items.length) {
-      list.innerHTML = '<li class="palette__empty">Không tìm thấy kết quả</li>';
+      list.innerHTML = '<li class="palette__empty">No results found</li>';
       return;
     }
 
     var html = '', group = '';
     items.forEach(function(r, i) {
-      var g = r.kind === 'cmd' ? 'Lệnh' : 'Bài viết';
+      var g = r.kind === 'cmd' ? 'Commands' : 'Posts';
       if (g !== group) {
         html += '<li class="palette__group" role="presentation">' + g + '</li>';
         group = g;
@@ -211,7 +211,7 @@
   function choose(i) {
     var r = items[i];
     if (!r) return;
-    if (r.kind === 'cmd' && r.cmd.title === 'Phím tắt') {
+    if (r.kind === 'cmd' && r.cmd.title === 'Keyboard shortcuts') {
       r.cmd.run();
       return;
     }
