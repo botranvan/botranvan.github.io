@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Cách cài đặt PostgreSQL Database Replication
+description: "Tìm hiểu PostgreSQL replication (streaming và logical) và hướng dẫn cài đặt physical replication trên Ubuntu 22.04."
 category: tech
 ---
 

@@ -1,6 +1,6 @@
 <aside id="sidebar">
   <nav id="tags">
-    <a href="/index.html" id="avatar" style="background-image:url({{ site.avatar }})"></a>
+    <a href="/index.html" id="avatar" aria-label="Home" style="background-image:url({{ site.avatar }})"></a>
 
     <ul id="tags__ul">
       <li id="pl__all" class="tags__li tags-btn active">All articles</li>
@@ -10,23 +10,23 @@
     </ul>
 
     <div id="tags__bottom">
-      <a href="{{ site.author.github }}" id="icon-github" class="tags-btn fontello" target="_blank"></a>
-      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello" target="_blank"></a>
-      <a href="mailto:{{ site.author.email }}" id="icon-email" class="tags-btn fontello"></a>
+      <a href="{{ site.author.github }}" id="icon-github" class="tags-btn fontello" target="_blank" rel="noopener" aria-label="GitHub"></a>
+      <a href="{{ site.subscribe_rss }}" id="icon-feed" class="tags-btn fontello" target="_blank" rel="noopener" aria-label="RSS feed"></a>
+      {% assign email_parts = site.author.email | split: "@" %}
+      <a href="#" id="icon-email" class="tags-btn fontello js-email" data-user="{{ email_parts[0] }}" data-domain="{{ email_parts[1] }}" aria-label="Email"></a>
     </div>
   </nav> <!-- end #tags -->
 
   <div id="posts-list">
     <form action="" id="search-form">
-      <a href="/index.html" id="mobile-avatar" style="background-image:url({{ site.avatar }})"></a>
+      <a href="/index.html" id="mobile-avatar" aria-label="Home" style="background-image:url({{ site.avatar }})"></a>
       <!-- NOTE: input field is disabled by default -->
-      <input id="search-input" type="text" placeholder="Search something..." >
+      <input id="search-input" type="search" placeholder="Search something..." aria-label="Search posts">
     </form>
 
     <nav id="pl__container">
     {% for post in site.posts %}
-      <!-- <a class="{{ post.categories }} pl__all" href="{{ post.url }}"><span class="pl__circle"></span><span class="pl__title">{{ post.title }}</span><span class="pl__date">{{ post.date | date: "%Y-%m-%d" }}</span></a> -->
-      <a class="{{ post.categories }} pl__all" href="{{ post.url }}"><span class="pl__circle"></span><span class="pl__title">{{ post.title }}</span></a>
+      <a class="{{ post.categories }} pl__all" href="{{ post.url }}"><span class="pl__circle"></span><span class="pl__title">{{ post.title }}</span><span class="pl__date">{{ post.date | date: "%Y-%m-%d" }}</span></a>
     {% endfor %}
     </nav>
   </div> <!-- end #posts-list -->

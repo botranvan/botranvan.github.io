@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ page.lang | default: site.lang | default: 'vi' }}">
   <head>
     {% include header.html %}
   </head>
   <body>
-    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
-    <button id="scroll-top"><span id="icon-arrow-up" class="fontello"></span></button>
+    <button id="js-fullscreen" aria-label="Toggle fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+    <button id="scroll-top" aria-label="Scroll to top"><span id="icon-arrow-up" class="fontello"></span></button>
 
     {% include nav.html %}
     <div id="post">
       <div id="pjax">
         {{ content }}
-        </br>
-        <hr align="center" width="100%" color="#F1F1F1" size="3"></hr>
+        <br>
+        <hr class="footer-divider">
         {% include copyright.html %}
       </div> <!-- end #pjax -->
 
@@ -24,6 +24,6 @@
       </div>
     </div> <!-- end #post -->
     {% include scripts.html %}
-    <script id="dsq-count-scr" src="//botran.disqus.com/count.js" async></script>
+    <script id="dsq-count-scr" src="https://{{ site.disqus.shortname }}.disqus.com/count.js" async></script>
    </body>
  </html>

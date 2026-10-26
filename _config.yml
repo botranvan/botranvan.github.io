@@ -1,9 +1,10 @@
 # Site settings
-title: Ministry's personal blog
+title: "Bo Tran – DevOps & Database notes"
 email: tranbo9xnd@gmail.com
-description: My blog
+description: "Ghi chép về DevOps, database high availability, replication và migration (PostgreSQL, MySQL, MongoDB, Redis, OpenStack)."
+lang: vi
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://botranvan.github.io/index.html" # the base hostname & protocol for your site
+url: "https://botranvan.github.io" # the base hostname & protocol for your site
 
 # Paginate
 #gems: [jekyll-paginate]
@@ -21,6 +22,18 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - vendor
+  - _drafts
+
 #relative_permalinks: true
 # type of link for post on blog
 permalink: /:year-:month-:day-:title.html
@@ -31,8 +44,8 @@ favicon: /assets/image/favicon.ico
 author:
   name: Bo Tran
   email: tranbo9xnd@gmail.com
-  link: http://botranvan.github.io/
-  facebook: http://facebook.com/Ministry.Nd
+  link: https://botranvan.github.io/
+  facebook: https://facebook.com/Ministry.Nd
   facebook_username: Ministry.Nd
   github: https://github.com/botranvan
   github_username: botranvan
@@ -42,7 +55,7 @@ locals:
   tags: tags
   about: about
   active: tech
-subscribe_rss: /pages/atom.xml
+subscribe_rss: /pages/rss.xml
 
 # Avatar
 avatar: /assets/image/avatar.png

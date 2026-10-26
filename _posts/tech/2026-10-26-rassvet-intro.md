@@ -3,6 +3,8 @@ title: "Rassvet: a new dawn for your OpenStack dashboard"
 description: "Meet Rassvet, a fast, single-binary OpenStack dashboard with a command palette, operator tools and Terraform export."
 date: 2026-10-26
 cover: images/01-cover.png
+image: /images/2026-10-26-rassvet-intro/01-cover.png
+lang: en
 tags: [openstack, dashboard, rassvet, skyline, horizon]
 layout: post
 category: tech

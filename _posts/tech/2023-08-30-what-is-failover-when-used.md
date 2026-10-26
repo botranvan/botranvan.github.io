@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Failover là gì? Khi nào thì sử dụng?
+description: "Failover là gì, khác gì Fallback, cách failover hoạt động, các loại failover và khi nào nên sử dụng."
 category: tech
 ---
 
@@ -55,7 +56,7 @@ Sau đó, có thể chúng ta sẽ cần phải `fix error` cho hệ thống pri
 
 - `Active - Passive failover`: Đây là mô hình triển khai mà trong đó các thành phần primary sẽ chịu trách nhiệm xử lý các traffic gửi đến, thành phần secondary sẽ đóng vai trò là `standby node` - không xử lý bất kỳ traffic nào.
 
-   ![active-pasive-arch](/images/2023-08-30-what-is-failover-when-used/active-pasive-arch.png)
+   ![active-pasive-arch](/images/2023-08-30-what-is-failover-when-used/active-passive-arch.png)
    
 
 Dù là mô hình nào chúng ta chọn đi nữa cũng đều dẫn đến việc tốn kém chi phí. Chi phí ở đây bao gồm bất cứ thứ gì có liên quan đến hệ thống như: chi phí triển khai, chi phí vận hành, chi phí dịch vụ liên quan đến người dùng như làm thời gian delay cao hơn, ...
