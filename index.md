@@ -4,7 +4,7 @@ title: Technology changes the world - Ministry's personal blog
 ---
 ---
 
-![](/images/1996-09-08-about-me/head.jpg)
+![](/images/about-me/head.jpg)
 
 
 Contact information:
