@@ -68,6 +68,19 @@ $('#mobile-avatar').on('click', function(){
   $('#sidebar, #pjax, #icon-arrow').addClass('fullscreen');
 });
 
+// Build mailto links on click so the address is not in the HTML for scrapers
+$(document).on('click', '.js-email', function(e) {
+  var address = $(this).data('user') + '@' + $(this).data('domain');
+  if ($(this).attr('href') === '#') {
+    e.preventDefault();
+    $(this).attr('href', 'mailto:' + address);
+    if (!$(this).hasClass('fontello')) {
+      $(this).text(address);
+    }
+    window.location.href = 'mailto:' + address;
+  }
+});
+
 // Pjax
 $(document).pjax('#avatar, #mobile-avatar, .pl__all', '#pjax', { fragment: '#pjax', timeout: 10000 });
 $(document).on({
@@ -89,7 +102,7 @@ $(document).on({
 // Re-run scripts for post content after pjax
 function afterPjax() {
   // Open links in new tab
-  $('#post__content a').attr('target','_blank');
+  $('#post__content a').attr({target: '_blank', rel: 'noopener'});
 
   // Generate post TOC for h1 and h2
   var toc = $('#post__toc-ul');

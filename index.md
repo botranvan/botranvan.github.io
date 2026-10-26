@@ -1,16 +1,16 @@
 ---
 layout: page
-title: Technology changes the world - Ministry's personal blog
+title: Technology changes the world
 ---
 ---
 
-![](/images/about-me/head.jpg)
+![Bo Tran](/images/about-me/head.jpg)
 
 
 Contact information:
 
 - Facebook: [Trần Bộ](https://facebook.com/Ministry.Nd)
-- Email: <tranbo9xnd@gmail.com>
+- Email: <a href="#" class="js-email" data-user="tranbo9xnd" data-domain="gmail.com">click to show email</a>
 
 ---
 {% include disqus.html %}

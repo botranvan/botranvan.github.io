@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Migrate data giữa các postgresql server sử dụng pglogical
+description: "Hướng dẫn migrate data giữa các PostgreSQL server với downtime tối thiểu bằng extension pglogical (unidirectional và bidirectional replication)."
 category: tech
 ---
 

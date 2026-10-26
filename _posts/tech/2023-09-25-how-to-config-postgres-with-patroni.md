@@ -1,6 +1,7 @@
 ---
 layout: post
 title: High Availability Postgres with Patroni/ Spilo (Part 1)
+description: "Xây dựng PostgreSQL High Availability với Patroni/Spilo, phần 1: Patroni/Spilo là gì, mô hình triển khai, cấu hình và kiểm tra failover."
 category: tech
 ---
 

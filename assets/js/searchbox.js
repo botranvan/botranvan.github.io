@@ -5,7 +5,7 @@ $(function(){
 
 
     //搜索框文字变化时间
-    $("#search-input").keyup(function(){
+    $("#search-input").on("input", function(){
         //$("#s-box").hide("slow");
         var text = $("#search-input").val().toLowerCase();
         //console.log(text);

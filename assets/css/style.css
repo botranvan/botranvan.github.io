@@ -351,8 +351,9 @@ a {
 
 .pl__date {
   color: #9aa4af;
-  font-size: 14px;
-  float: right; }
+  font-size: 12px;
+  display: block;
+  padding-left: calc(.75em + 9px); }
 
 /*---------------------------------*\
    Post
@@ -787,6 +788,12 @@ iframe {
 
 .declare {
   font-size: .8em;
+}
+
+.footer-divider {
+  width: 100%;
+  border: 0;
+  border-top: 3px solid #F1F1F1;
 }
 
 /*---------------------------------*\

@@ -5,7 +5,7 @@ layout: default
 <article id="post__content">
   <h1 id="post__title" data-identifier="{{ page.date | date: "%Y%m%d" }}">{{ page.title }}</h1>
   <div id="post__date">{{ page.date | date: "%Y-%m-%d" }}</div>
-  <declare id="declare" class="declare">
+  <aside id="declare" class="declare">
     <hr/>
     The authorization method used in all articles in this blog is:
     <ul>
@@ -16,16 +16,16 @@ layout: default
     </ul>
     Please be sure to indicate the source, thank you.<br>
     Disclaimer: This blog is welcome to forward, but please keep the original author information!<br>
-    Facebook: <a href="https://facebook.com/Ministry.Nd">@Ministry.Nd</a>;<br>
-    Blog address: <a href="https://botranvan.github.io">Ministry's personal blog</a>;<br>
+    Facebook: <a href="{{ site.author.facebook }}" rel="noopener">@{{ site.author.facebook_username }}</a>;<br>
+    Blog address: <a href="{{ site.url }}">{{ site.title }}</a>;<br>
     Content is my study, research and summary, if there are similarities, it is an honor!
     <hr/>
-  </declare>
-  {{ content }}
+  </aside>
+  {{ content | replace: '<img ', '<img loading="lazy" ' }}
 </article>
 <!-- end #post__content -->
 
 <h2 id="post__discuss">Discuss</h2>
-<img src="/images/like.jpeg" alt="Appreciation" class="image-center">
+<img src="/images/like.jpeg" alt="Appreciation" class="image-center" loading="lazy">
 {% include disqus.html %}
 {% include share.html %}
