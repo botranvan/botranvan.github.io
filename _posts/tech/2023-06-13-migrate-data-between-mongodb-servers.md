@@ -2,6 +2,7 @@
 layout: post
 title: Migrate data giữa các MongoDB servers
 description: "Cách migrate data giữa các MongoDB server bằng mongodump và mongorestore."
+tags: [mongodb, migration]
 category: tech
 ---
 

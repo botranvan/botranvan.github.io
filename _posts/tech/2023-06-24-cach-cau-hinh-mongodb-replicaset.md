@@ -2,6 +2,7 @@
 layout: post
 title: MongoDB ReplicaSet là gì? Sử dụng như nào?
 description: "MongoDB ReplicaSet là gì, cơ chế redundancy, auto-failover và cách sử dụng."
+tags: [mongodb, replication, high-availability]
 category: tech
 ---
 

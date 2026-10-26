@@ -2,6 +2,7 @@
 layout: post
 title: Failover là gì? Khi nào thì sử dụng?
 description: "Failover là gì, khác gì Fallback, cách failover hoạt động, các loại failover và khi nào nên sử dụng."
+tags: [high-availability]
 category: tech
 ---
 

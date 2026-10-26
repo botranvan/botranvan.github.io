@@ -1,28 +1,30 @@
 /**
- * Created by zteliuyw on 15/5/28.
+ * Sidebar filter: combines the selected tag and the search text,
+ * and hides year headers that have no visible posts left.
  */
-$(function(){
+var postFilter = { tag: '', text: '' };
 
+function normalizeText(s) {
+  return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd');
+}
 
-    //搜索框文字变化时间
-    $("#search-input").on("input", function(){
-        //$("#s-box").hide("slow");
-        var text = $("#search-input").val().toLowerCase();
-        //console.log(text);
+function applyPostFilter() {
+  var text = normalizeText(postFilter.text);
+  $('#pl__container .pl__all').each(function() {
+    var matchTag = !postFilter.tag || $(this).hasClass(postFilter.tag);
+    var matchText = !text || normalizeText($(this).find('.pl__title').text()).indexOf(text) !== -1;
+    $(this).toggle(matchTag && matchText);
+  });
+  $('#pl__container .pl__year').each(function() {
+    $(this).toggle($(this).nextUntil('.pl__year', '.pl__all').filter(function() {
+      return $(this).css('display') !== 'none';
+    }).length > 0);
+  });
+}
 
-        if(text =="" || text==undefined){
-            $("#pl__container a").show();
-        }else{
-            $("#pl__container a").hide();
-            $(".pl__title").each(function(){
-                var htmlstr = $(this).html().toLowerCase();
-                if(htmlstr.indexOf(text) != -1){
-                    console.log(htmlstr);
-                    $(this).parent().show();
-                }
-            })
-        }
-
-
-    })
-})
+$(function() {
+  $('#search-input').on('input', function() {
+    postFilter.text = $(this).val();
+    applyPostFilter();
+  });
+});

@@ -2,6 +2,7 @@
 layout: post
 title: Migrate data giữa các MariaDB/ MySQL server
 description: "Hướng dẫn migrate data giữa các MariaDB/MySQL server với downtime tối thiểu bằng cách cấu hình replication."
+tags: [mysql, migration, replication]
 category: tech
 ---
 
