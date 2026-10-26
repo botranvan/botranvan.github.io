@@ -1,9 +1,9 @@
 <aside id="sidebar">
   <nav id="tags">
-    <a href="/index.html" id="avatar" aria-label="Trang chủ" style="background-image:url({{ site.avatar }})"></a>
+    <a href="/index.html" id="avatar" aria-label="Home" style="background-image:url({{ site.avatar }})"></a>
 
     <ul id="tags__ul">
-      <li id="pl__all" class="tags__li tags-btn active" data-tag="">Tất cả</li>
+      <li id="pl__all" class="tags__li tags-btn active" data-tag="">All categories</li>
       {% assign sorted_tags = site.tags | sort %}
       {% for tag in sorted_tags %}
         {% if tag[1].size > 1 %}
@@ -22,8 +22,8 @@
 
   <div id="posts-list">
     <form action="" id="search-form" onsubmit="return false">
-      <a href="/index.html" id="mobile-avatar" aria-label="Trang chủ" style="background-image:url({{ site.avatar }})"></a>
-      <input id="search-input" type="search" placeholder="Tìm kiếm... (Ctrl K)" aria-label="Tìm bài viết">
+      <a href="/index.html" id="mobile-avatar" aria-label="Home" style="background-image:url({{ site.avatar }})"></a>
+      <input id="search-input" type="search" placeholder="Search... (Ctrl K)" aria-label="Search posts">
     </form>
 
     <nav id="pl__container">

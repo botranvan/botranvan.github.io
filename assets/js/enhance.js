@@ -41,7 +41,7 @@
     // Collapsible copy at the top of the post for narrow screens
     var inline = document.createElement('details');
     inline.className = 'toc-inline';
-    inline.innerHTML = '<summary>Mục lục</summary><ul>' + html + '</ul>';
+    inline.innerHTML = '<summary>Contents</summary><ul>' + html + '</ul>';
     var anchor = article.querySelector('.post__series') || document.getElementById('post__meta');
     anchor.parentNode.insertBefore(inline, anchor.nextSibling);
   }
@@ -117,12 +117,12 @@
       var copy = document.createElement('button');
       copy.type = 'button';
       copy.className = 'code-box__copy';
-      copy.textContent = 'Sao chép';
+      copy.textContent = 'Copy';
       copy.addEventListener('click', function() {
         var code = pre.querySelector('code') || pre;
         copyText(code.innerText.replace(/\n$/, '')).then(function() {
-          copy.textContent = 'Đã chép ✓';
-          setTimeout(function() { copy.textContent = 'Sao chép'; }, 1500);
+          copy.textContent = 'Copied ✓';
+          setTimeout(function() { copy.textContent = 'Copy'; }, 1500);
         });
       });
       bar.appendChild(copy);
@@ -134,10 +134,10 @@
         var toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'code-box__toggle';
-        toggle.textContent = 'Xem toàn bộ (' + lines + ' dòng)';
+        toggle.textContent = 'Show all (' + lines + ' lines)';
         toggle.addEventListener('click', function() {
           var collapsed = box.classList.toggle('is-collapsed');
-          toggle.textContent = collapsed ? 'Xem toàn bộ (' + lines + ' dòng)' : 'Thu gọn';
+          toggle.textContent = collapsed ? 'Show all (' + lines + ' lines)' : 'Collapse';
         });
         box.appendChild(toggle);
       }
@@ -148,7 +148,7 @@
   var zoom = document.createElement('div');
   zoom.id = 'img-zoom';
   zoom.setAttribute('role', 'dialog');
-  zoom.setAttribute('aria-label', 'Ảnh phóng to');
+  zoom.setAttribute('aria-label', 'Zoomed image');
   zoom.innerHTML = '<img alt="">';
   document.body.appendChild(zoom);
   zoom.addEventListener('click', function() { zoom.classList.remove('is-open'); });

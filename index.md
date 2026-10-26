@@ -3,7 +3,7 @@ layout: page
 title: Technology changes the world
 ---
 
-<p class="home__intro">{{ site.description }} · <a class="js-pjax" href="/about.html">Về mình →</a></p>
+<p class="home__intro">{{ site.description }} · <a class="js-pjax" href="/about.html">About me →</a></p>
 
 <div class="post-cards">
 {% for post in site.posts %}

@@ -5,12 +5,12 @@
   </head>
   <body>
     <header id="mobile-bar">
-      <button id="mobile-bar__menu" class="mobile-bar__btn" aria-label="Danh sách bài viết">☰</button>
+      <button id="mobile-bar__menu" class="mobile-bar__btn" aria-label="Posts list">☰</button>
       <a id="mobile-bar__title" class="js-pjax" href="/">{{ site.title }}</a>
-      <button id="mobile-bar__search" class="mobile-bar__btn js-open-palette" aria-label="Tìm kiếm (Ctrl K)">⌕</button>
+      <button id="mobile-bar__search" class="mobile-bar__btn js-open-palette" aria-label="Search (Ctrl K)">⌕</button>
     </header>
-    <button id="js-fullscreen" aria-label="Ẩn/hiện danh sách bài viết"><span id="icon-arrow" class="fontello"></span></button>
-    <button id="scroll-top" aria-label="Lên đầu trang"><span id="icon-arrow-up" class="fontello"></span></button>
+    <button id="js-fullscreen" aria-label="Show/hide posts list"><span id="icon-arrow" class="fontello"></span></button>
+    <button id="scroll-top" aria-label="Scroll to top"><span id="icon-arrow-up" class="fontello"></span></button>
 
     {% include nav.html %}
     <div id="post">
@@ -21,8 +21,8 @@
           {% include copyright.html %}
         </div> <!-- end #pjax -->
 
-        <aside id="post__toc" aria-label="Mục lục">
-          <span id="post__toc-title">Mục lục</span>
+        <aside id="post__toc" aria-label="Table of contents">
+          <span id="post__toc-title">Contents</span>
           <ul id="post__toc-ul"></ul>
         </aside>
       </div>

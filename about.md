@@ -1,12 +1,12 @@
 ---
 layout: page
-title: Giới thiệu
+title: About me
 permalink: /about.html
 ---
 
 ![Bo Tran](/images/about-me/head.jpg)
 
-Thông tin liên hệ:
+Contact information:
 
 - Facebook: [Trần Bộ](https://facebook.com/Ministry.Nd)
-- Email: <a href="#" class="js-email" data-user="tranbo9xnd" data-domain="gmail.com">bấm để hiện email</a>
+- Email: <a href="#" class="js-email" data-user="tranbo9xnd" data-domain="gmail.com">click to show email</a>
